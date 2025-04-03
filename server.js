@@ -19,12 +19,16 @@ const pool = new Pool({
 // 📌 Ruta para registrar usuarios
 app.post("/registrar", async (req, res) => {
     const { nombre, apellido, edad } = req.body;
+    console.log("Datos recibidos:", nombre, apellido, edad); // ✅ Verifica que los datos llegan
 
     try {
-        await pool.query("INSERT INTO usuarios (nombre, apellido, edad) VALUES ($1, $2, $3)", [nombre, apellido, edad]);
+        await pool.query(
+            "INSERT INTO usuarios (nombre, apellido, edad) VALUES ($1, $2, $3)", 
+            [nombre, apellido, edad]
+        );
         res.json({ mensaje: "Usuario registrado correctamente" });
     } catch (error) {
-        console.error(error);
+        console.error("Error en la base de datos:", error); // ✅ Muestra el error exacto
         res.status(500).json({ mensaje: "Error en el servidor" });
     }
 });
