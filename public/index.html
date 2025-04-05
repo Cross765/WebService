@@ -28,7 +28,7 @@
             const apellido = document.getElementById("apellido").value;
             const edad = document.getElementById("edad").value;
 
-            const response = await fetch("http://localhost:3000/registrar", {
+            const response = await fetch("/registrar", { // ✅ Ruta relativa
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ nombre, apellido, edad })
